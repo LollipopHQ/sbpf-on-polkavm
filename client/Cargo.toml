@@ -1,0 +1,24 @@
+[package]
+name = "client"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+litesvm = {path = "../litesvm/crates/litesvm"}
+litesvm-loader = {path = "../litesvm/crates/loader"}
+solana-keypair = "2.2"
+solana-pubkey = "2.2"
+solana-message = "2.2"
+solana-signer = "2.2"
+solana-system-interface = "1"
+solana-transaction = {workspace = true}
+solana-sdk = {workspace = true}
+anyhow = "1.0.98"
+env_logger = "0.11.8"
+solana-sbpf = {workspace = true}
+solana-bpf-loader-program = {path = "../solana-bpf-loader-program"}
+solana-feature-set = {workspace = true}
+solana-program-runtime = {workspace = true}
+solana-compute-budget = {workspace = true}
+counter = { version = "0.1.0", path = "../solana-programs/counter/programs/counter" }
+anchor-lang = "0.31.1"

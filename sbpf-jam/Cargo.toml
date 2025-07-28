@@ -1,0 +1,38 @@
+[package]
+name = "sbpf-jam"
+version = "0.1.0"
+edition = "2021"
+authors = ["lollipop.builders"]
+license = "Apache-2.0"
+
+[dependencies]
+bounded-collections = { version = "0.2.4", default-features = false }
+jam-bootstrap-service-common = { version = "0.1.22", default-features = false }
+jam-codec = {version = "0.1.0", default-features = false, features = ["jam-codec-derive"]}
+jam-pvm-common = {version = "0.1.22", features = ["service", "logging"], default-features = false}
+jam-types = { version = "0.1.22", default-features = false }
+polkavm-derive = "0.24.0"
+md5 = {version = "0.8.0", default-features = false}
+
+[dependencies.solana-sbpf]
+path = "../sbpf"
+
+[dependencies.scale]
+version = "3.6.12"
+features = ["derive"]
+default-features = false
+package = "parity-scale-codec"
+
+[lints.clippy]
+fn_to_numeric_cast_any = "deny"
+new_without_default = "allow"
+redundant_closure = "allow"
+result_unit_err = "allow"
+too_many_arguments = "allow"
+type_complexity = "allow"
+unwrap_used = "deny"
+use_debug = "deny"
+
+[lints.clippy.correctness]
+level = "deny"
+priority = -1

@@ -1,0 +1,6 @@
+[submodule "sbpf"]
+	path = sbpf
+	url = https://github.com/LollipopHQ/sbpf.git
+[submodule "litesvm"]
+	path = litesvm
+	url = https://github.com/LollipopHQ/litesvm.git

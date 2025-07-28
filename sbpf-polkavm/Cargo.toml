@@ -1,0 +1,35 @@
+[package]
+name = "sbpf-polkavm"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = {workspace = true}
+env_logger = { version = "0.10.0", default-features = false }
+polkavm = "0.24.0"
+log = "0.4.20"
+jam-types = { version = "0.1.22", default-features = false }
+jam-pvm-common = {version = "0.1.22"}
+jam-codec = "0.1.0"
+byteorder = "1.5.0"
+md5 = "0.8.0"
+solana-account = {workspace = true}
+solana-cpi = {workspace = true}
+solana-hash = {workspace = true}
+solana-sha256-hasher = {workspace = true}
+solana-instruction = {workspace = true}
+solana-loader-v3-interface = {workspace = true}
+solana-program-runtime = {workspace = true}
+solana-program-entrypoint = {workspace = true}
+solana-pubkey = {workspace = true}
+solana-measure = {workspace = true}
+solana-rent = {workspace = true}
+solana-sdk-ids = {workspace = true}
+solana-sysvar-id = {workspace = true}
+solana-stable-layout = {workspace = true}
+solana-timings = {workspace = true}
+solana-transaction-context = {workspace = true}
+solana-account-info = {workspace = true}
+
+[dependencies.solana-sbpf]
+path = "../sbpf"
