@@ -40,6 +40,17 @@ And then, you should get the following output:
 
 As you can see, we call the counter program `initialize` and `inc` instruction, and the PDA's data is changed expectedly.
 
+## profiling statistics
+
+| item | value|
+| --- | --- |
+| compiled binary size | 143KB |
+| execution time(initialize instruction) | 377ms |
+| execution time(inc instruction) | 379ms |
+| memory usage for creating polkavm instance    | 1.6MB |
+| peak memory usage for executing initialize instruction | 2.36MB |
+| peak memory usage for executing inc instruction | 2.36MB | 
+
 ## code structure
 
 ```text
@@ -72,7 +83,7 @@ let (parameter_bytes, regions, accounts_metadata) = serialization::serialize_par
     )?;
 ```
 
-Proceed to instantiate the virtual machine and initiate program execution:​
+Proceed to instantiate the virtual machine and execute the program:​
 ```Rust
 create_vm!(vm, executable, regions, accounts_metadata, invoke_context);
 ...
