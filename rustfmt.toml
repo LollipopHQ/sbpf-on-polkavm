@@ -1,6 +1,7 @@
 ignore = [
     "target/**",
     "sbpf/**",
+    "litesvm/**",
 ]
 imports_granularity = "One"
 group_imports = "One"
