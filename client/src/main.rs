@@ -31,7 +31,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     svm.airdrop(&payer_key, 999999999995000).unwrap();
 
     let program_data = include_bytes!(
-        "../../solana-programs/counter/target/sbf-solana-solana/release/counter.so"
+        "../../solana-programs/counter/target/sbpf-solana-solana/release/counter.so"
     );
     deploy_upgradeable_program(&mut svm, &payer, &program_keypair, program_data).unwrap();
 
