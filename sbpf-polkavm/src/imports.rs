@@ -112,6 +112,7 @@ pub fn define_all_typed<'a, 'b>(
     SolSetReturnData::register(linker, handler, "sol_set_return_data")?;
     SolInvokeSignedRust::register(linker, handler, "sol_invoke_signed_rust")?;
     SolMemcpy::register(linker, handler, "sol_memcpy_")?;
+    SolMemcmp::register(linker, handler, "sol_memcmp_")?;
     SolMemset::register(linker, handler, "sol_memset_")?;
     SolHash::register::<Sha256Hasher>(linker, handler, "sol_sha256")?;
     SolGetRentSysvar::register(linker, handler, "sol_get_rent_sysvar")
@@ -353,6 +354,39 @@ declare_sbpf_builtin! {
         let mut handler = handler;
         let src_data = handler.read_memory(polka_src, (n as usize).try_into().unwrap()).unwrap();
         handler.write_memory(polka_dst, &src_data).unwrap();
+    }
+}
+
+declare_sbpf_builtin!{
+    SolMemcmp,
+    fn rust(
+        handler: InstanceHandler,
+        invoke_context: &mut InvokeContext,
+        s1_addr: u64,
+        s2_addr: u64,
+        n: u64,
+        cmp_result_addr: u64,
+    ) -> () {
+        let cost = invoke_context
+            .get_execution_cost()
+            .mem_op_base_cost
+            .saturating_add(n);
+        invoke_context.consume_checked(cost).unwrap();
+        let s1 = map_and_read_objects::<u8>(&handler, s1_addr, n as usize).unwrap();
+        let s2 = map_and_read_objects::<u8>(&handler, s2_addr, n as usize).unwrap();
+        let mut result = 0i32;
+        unsafe {
+            for i in 0..(n as usize) {
+                let a = *s1.get_unchecked(i);
+                let b = *s2.get_unchecked(i);
+                if a != b {
+                    result = (a as i32).saturating_sub(b as i32);
+                    break;
+                };
+            }
+        }
+        let mut handler = handler;
+        handler.map_and_write_memory(cmp_result_addr, &result.to_le_bytes()).unwrap();
     }
 }
 
